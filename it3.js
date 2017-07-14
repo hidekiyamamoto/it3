@@ -1,4 +1,4 @@
-//it3.js by Hideki Yamamoto & Gioele Cerati - special thanks to : ` 
+//it3.js by Hideki Yamamoto - special thanks to : ` 
 window._UA=navigator.userAgent.toLowerCase();window.tempfix=false;
 window.HOST=document.location.protocol.toString()+'//'+document.location.hostname.toString();
 it3={NS:'it3',$$:function(e){if(typeof e=='string'){e=document.getElementById(e);}return e;},$$c:function(e){return document.getElementsByClassName(e);},
