@@ -42,7 +42,7 @@ querystring:function(key,qs){if(this.inoe(qs)){if(History){if(History.getState){
  	_doload:function(ev,_elm,_onfinish,_onstep,_onerror,_mem){var req=(ev.currentTarget||ev.target||ev.srcElement);if(req.readyState>1&&req.readyState<4){if(req.status==200){if(_onstep)_onstep(req);}
 		}else if(req.readyState==4){if(req.status==200){_onfinish(req,_mem);}else{console.log('Request failed');console.log(req);if(_onerror){_onerror(req)}}}},
 /* ----------------------------------------------------------------------------------------------------------------------- */
-		/* ------------------------------------------------------------------------------------- FILES PRELOAD and CACHING */
+/* ----------------------------------------------------------------------------------------- FILES PRELOAD and CACHING --- */
 	preloaded:{},preload:function(t,prop,_next,_reserved){/*{R:'void',DESC:'preloads resources froma uri, optionally posting data, then retrieves and stores selected prop from the response in the preloaded object list',t:{T:'string||string array',DESC:'one or more uris to preload'},prop:{T:'string',DESC:'the name of the property to store from the response'},_next:{T:'function',DESC:'If provided, will be called when all the resources have been preloaded'},_reserved:{T:'reserved',DESC:'reserved'}}*/
 		if(!_reserved){if(t instanceof Array){this.Rpreloading=t;this.preload(false,prop,_next,true);
 		}else{if(this.preloaded[t]){_next(this.preloaded)}else{var $this=this;
@@ -96,8 +96,9 @@ querystring:function(key,qs){if(this.inoe(qs)){if(History){if(History.getState){
 	makebloblink:function(content,filename,contentType,linkid){if(!contentType)contentType='application/octet-stream';
 		var blob=new Blob([content],{'type': contentType});var link=window.document.createElement('a');link.id=linkid;
 		link.href=window.URL.createObjectURL(blob);link.download=filename;link.innerHTML='<i class="icon ion-android-download"></i> Download export';return link;}
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------ DATA STRUCTURES -------- --- */
 	
-
 };
 
 /* ----------------------------------------------------------------------------------------------------------------------- */
@@ -132,7 +133,7 @@ it3.Table.prototype={
 		var tr=document.getElementsByClassName(this.uid+d['$key'].replace(/ /g,''))[0];if(tr){it3.clearchilds(tr);}
 		else {tr=document.createElement('tr');tr=this.TABLE.tBodies[0].insertRow(tr);tr.classList.add(this.uid+d['$key'].replace(/ /g,''));tr.setAttribute('onclick','this.classList.toggle("selected")');}
 		var td=document.createElement('td');if(!d['doctitle']){d['doctitle']=d.$key.substr(d.$key.indexOf('-')+1).replace('*','.');}
-		td.innerHTML='<a target="_blank" onclick="it3.fix(event)" href="'+HOST+'/?'+d['url']+'" /><i class="fa fa-external-link"></i></a><a href="#" onclick="it3.fix(event);return app.dialog(\''+d['$key']+'\')" draggable="true" ondragstart="app.drag(\''+d['$key']+'\',\''+d[f$.db.docnamefield].replace('\'','\\\'')+'\')" ondragover="event.preventDefault()" ondrop="fix(event);app.drop(\''+d['$key']+'\',\''+d[f$.db.docnamefield]+'\')"> '+d[f$.db.docnamefield]+'</a>';
+		td.innerHTML='<a target="_blank" onclick="it3.fix(event);return app.dialog(\''+d['$key']+'\');return false;" href="'+HOST+'/?'+d['url']+'" /><i class="fa fa-external-link"></i></a><a href="#" onclick="it3.fix(event);return app.details(\''+d['$key']+'\')" draggable="true" ondragstart="app.drag(\''+d['$key']+'\',\''+d[f$.db.docnamefield].replace('\'','\\\'')+'\')" ondragover="event.preventDefault()" ondrop="fix(event);app.drop(\''+d['$key']+'\',\''+d[f$.db.docnamefield]+'\')"> '+d[f$.db.docnamefield]+'</a>';
 		tr.appendChild(td);for(var o in this.cols){if(!this.ignorecol[o]){td=document.createElement('td');
 			if(this.fncol[o]){td.innerHTML=this.fncol[o](d);}else if(d[o]){if(d[o].join){td.innerHTML=d[o].join(', ')} 
 			else if(typeof d[o]=='number'){td.innerHTML=d[o].toLocaleString()}
