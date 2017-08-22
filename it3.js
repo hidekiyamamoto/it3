@@ -84,7 +84,7 @@ querystring:function(key,qs){if(this.inoe(qs)){if(History){if(History.getState){
 	_ACTBsetvalue:function(w){var vv=this.TEXTBOX.value.split(' ');if(vv.length<2){this.TEXTBOX.value=w}else{this.TEXTBOX.value='';for(var v=0;v<vv.length-1;v++){this.TEXTBOX.value+=vv[v]+' '}this.TEXTBOX.value+=w}this.clear();},
 	_ACTBonsuggest:function(w,$this){if($this.enabled){it3.ins($this.GHOST,'button',
 		['class','actbresult',
-		'onclick','it3.fix(event);var ACTB=it3.actb(\''+$this.TEXTBOX.id+'\');ACTB.setvalue(\''+w.replace('\'','\\\'')+'\');ACTB.TEXTBOX.focus()'],w)}},
+		'onclick','it3.fix(event);var ACTB=it3.actb(\''+$this.TEXTBOX.id+'\');ACTB.setvalue(\''+w.replace('\'','\\\'')+'\');ACTB.TEXTBOX.focus();if(ACTB.TEXTBOX.form){it3.$$(ACTB.TEXTBOX.form).onsubmit()}'],w)}},
 	_ACTBsetenabled:function(enabled){this.enabled=enabled;if(!enabled){this.clear()}},
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------ HTML5 JSON TABLE FACTORY --- */
