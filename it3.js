@@ -53,16 +53,19 @@ querystring:function(key,qs){if(this.inoe(qs)){if(History){if(History.getState){
 		break}}if(flag){delete this.Rpreloading;_next(this.preloaded);}}},
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------ JSON RENDER ENGINE --- */
-	rrgx0:new RegExp('<!--TT{([^>]*)}TT-->'),rrgx1:new RegExp('<!--JS{([^>]*)}JS-->'),rrgx2:new RegExp('JS-([^=]+)="([^"]*)"'),
-	rrgxLAST:new RegExp('<!--LOAD{([^>]*)}LOAD-->'),
+rrgx0:new RegExp('<!--TT{([^>]*)}TT-->'),rrgx1:new RegExp('<!--JS{([^>]*)}JS-->'),rrgx2:new RegExp('JS-([^=]+)="([^"]*)"'),
+	rrgxLAST:new RegExp('<!--LOAD{([^>]*)}LOAD-->'),rrgxSCRIPT:/<script\b[^>]*>([\s\S]*?)<\/script>/gm,
+	/*var rxs=/(<|%3C)script[\s\S]*?(>|%3E)[\s\S]*?(<|%3C)(\/|%2F)script[\s\S]*?(>|%3E)/gi;*/
 	render:function(tgt,tpl,data,_mode){if(!_mode){_mode='normal'}var out=this._render(tpl,data);this._renderfill(tgt,out[0],_mode,out[1]);},
 	_render:function(t,d){/*{R:'string',DESC:'performs evaluation of specially marked string templates, using an object instance as data',t:{T:'string',DESC:'the starting template string'},d:{T:'object','the object onto wich evaluate template expression against (referred as this in the template)'}}*/
+		var rnd=Math.floor(Math.random()*1000000000).toString();t=t.replace(/%UNIQUEID/g,rnd);
 		var tmp='';var rr=null;var jj=[];d.tmpfn=function(j){try{return eval(j)}catch(ex){return ex.message}};
 		rr=this.rrgx0.exec(t);while(rr!=null){t=t.replace(rr[0],this.preloaded[rr[1]]);rr=this.rrgx0.exec(t);}
 		rr=this.rrgx1.exec(t);while(rr!=null){tmp=d.tmpfn(rr[1]);t=t.replace(rr[0],tmp);rr=this.rrgx1.exec(t);}
 		rr=this.rrgx2.exec(t);while(rr!=null){tmp=d.tmpfn(rr[2]);t=t.replace(rr[0],rr[1]+'="'+tmp+'"');rr=this.rrgx2.exec(t);}
 		rr=this.rrgxLAST.exec(t);while(rr!=null){t=t.replace(rr[0],'');jj[jj.length]=rr[1];rr=this.rrgxLAST.exec(t);}
-	delete d.tmpfn;return [t,jj]},	
+		rr=this.rrgxSCRIPT.exec(t);while(rr!=null){try{eval(rr[1])}catch(ex){console.log('ERROR evaluating:'+ex.message)}rr=this.rrgxLAST.exec(t);}
+	delete d.tmpfn;return [t,jj]},
 	_renderfill:function(tgt,s,m,jj){tgt=this.$$(tgt);if(tgt.nodeName.toLowerCase()=='table'){console.log('todo:target is table')}
 		else{if(m=='normal'){}else{var n=document.createElement('div');n.innerHTML=s;
 			if(m=='append'){tgt.appendChild(n);}else if(m=='insert'){tgt.insertBefore(n,tgt.firstChild);}else{console.log('unsupported mode')}
