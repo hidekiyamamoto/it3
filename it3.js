@@ -64,7 +64,7 @@ rrgx0:new RegExp('<!--TT{([^>]*)}TT-->'),rrgx1:new RegExp('<!--JS{([^>]*)}JS-->'
 		rr=this.rrgx1.exec(t);while(rr!=null){tmp=d.tmpfn(rr[1]);t=t.replace(rr[0],tmp);rr=this.rrgx1.exec(t);}
 		rr=this.rrgx2.exec(t);while(rr!=null){tmp=d.tmpfn(rr[2]);t=t.replace(rr[0],rr[1]+'="'+tmp+'"');rr=this.rrgx2.exec(t);}
 		rr=this.rrgxLAST.exec(t);while(rr!=null){t=t.replace(rr[0],'');jj[jj.length]=rr[1];rr=this.rrgxLAST.exec(t);}
-		rr=this.rrgxSCRIPT.exec(t);while(rr!=null){try{eval(rr[1])}catch(ex){console.log('ERROR evaluating:'+ex.message)}rr=this.rrgxLAST.exec(t);}
+		rr=this.rrgxSCRIPT.exec(t);while(rr!=null){try{eval(rr[1])}catch(ex){console.log('ERROR evaluating:'+ex.message)}rr=this.rrgxSCRIPT.exec(t);}
 	delete d.tmpfn;return [t,jj]},
 	_renderfill:function(tgt,s,m,jj){tgt=this.$$(tgt);if(tgt.nodeName.toLowerCase()=='table'){console.log('todo:target is table')}
 		else{if(m=='normal'){}else{var n=document.createElement('div');n.innerHTML=s;
