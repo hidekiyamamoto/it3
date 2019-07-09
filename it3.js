@@ -67,7 +67,7 @@ rrgx0:new RegExp('<!--TT{([^>]*)}TT-->'),rrgx1:new RegExp('<!--JS{([^>]*)}JS-->'
 		rr=this.rrgxSCRIPT.exec(t);while(rr!=null){try{eval(rr[1])}catch(ex){console.log('ERROR evaluating:'+ex.message)}rr=this.rrgxSCRIPT.exec(t);}
 	delete d.tmpfn;return [t,jj]},
 	_renderfill:function(tgt,s,m,jj){tgt=this.$$(tgt);if(tgt.nodeName.toLowerCase()=='table'){console.log('todo:target is table')}
-		else{if(m=='normal'){}else{var n=document.createElement('div');n.innerHTML=s;
+		else{if(m=='normal'){tgt.get(0).innerHTML=s;}else{var n=document.createElement('div');n.innerHTML=s;
 			if(m=='append'){tgt.appendChild(n);}else if(m=='insert'){tgt.insertBefore(n,tgt.firstChild);}else{console.log('unsupported mode')}
 		}}if(jj.length>0){var $this=this;var post=function(){$this._renderpost(jj);};setTimeout(post,100);}},
 	_renderpost:function(jj){for(var j=0;j<jj.length;j++){try{eval(jj[j])}catch(ex){console.log('Error postloading render: '+ex.message);}}},
