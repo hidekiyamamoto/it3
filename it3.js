@@ -175,7 +175,7 @@ it3.Table.prototype={
 };
 
 
-it3.ins(document.head,'script',['src','https://cdn.rawgit.com/zenorocha/clipboard.js/402c9ee1/dist/clipboard.min.js']);
+it3.ins(document.head,'script',['src','https://cdn.jsdelivr.net/gh/zenorocha/clipboard.js/dist/clipboard.min.js']);
 
 /*
 	date : YYYYMMDD DD/MM/YY MM/DD/YY
