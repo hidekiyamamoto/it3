@@ -176,9 +176,9 @@ it3.Table.prototype={
 	togglecol:function(idx,_forcevisible){}
 };
 
-
+if(window.noloadcopy!=true){
 it3.ins(document.head,'script',['src','https://cdn.jsdelivr.net/gh/zenorocha/clipboard.js/dist/clipboard.min.js']);
-
+}
 /*
 	date : YYYYMMDD DD/MM/YY MM/DD/YY
 	time :
