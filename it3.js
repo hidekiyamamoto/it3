@@ -175,7 +175,7 @@ it3.Table.prototype={
 	filter:function(_idx){console.log('todo')},
 	togglecol:function(idx,_forcevisible){}
 };
-
+if(window.it3_onload){window.it3_onload();}
 if(window.noloadcopy!=true){
 it3.ins(document.head,'script',['src','https://cdn.jsdelivr.net/gh/zenorocha/clipboard.js/dist/clipboard.min.js']);
 }
