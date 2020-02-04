@@ -9,7 +9,10 @@ it3={NS:'it3',$$:function(e){if(typeof e=='string'){e=document.getElementById(e)
 	toggleFullScreen:function(){/*{R:'void',DESC:{}}*/
 		var d=document;var de=d.documentElement;if((d.fullScreenElement&&d.fullScreenElement!==null)||(!d.mozFullScreen&&!d.webkitIsFullScreen)){if(de.requestFullScreen){de.requestFullScreen();}else if(de.mozRequestFullScreen){de.mozRequestFullScreen();}else if(de.webkitRequestFullScreen){de.webkitRequestFullScreen(Element.ALLOWKEYBOARDINPUT);}}else{if(d.cancelFullScreen){d.cancelFullScreen();}else if(d.mozCancelFullScreen){d.mozCancelFullScreen();}else if(d.webkitCancelFullScreen){d.webkitCancelFullScreen();}}},
 querystring:function(key,qs){if(this.inoe(qs)){if(History){if(History.getState){qs=History.getState().url;}}if(!qs){qs=location.href}}qs=qs.slice(qs.indexOf('?'));if(!key){return qs;}if(key==''){return '';}var deft_="";key=key.replace(/[\[]/,'\\\[').replace(/[\]]/,'\\\]');var regex=new RegExp('[\\?&]'+key+'=([^&#]*)');qs=regex.exec(qs);if(qs==null){return deft_;}else{return decodeURIComponent(qs[1]);}},
- 
+ downloadbig:function(data,fn){const fileStream = streamSaver.createWriteStream(fn);
+	const writer = fileStream.getWriter();const encoder=new TextEncoder();
+	let uint8array = encoder.encode(data + "\n\n");writer.write(uint8array);
+	writer.close();};
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------- STRING UTILS ---  */
 	inoe:function(v){/*{R:'boolean',DESC:'returns true if value Is Null Or Empty, false otherwise',v:{T:'string',DESC:'the value to test'}}*/
