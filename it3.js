@@ -28,6 +28,20 @@ querystring:function(key,qs){if(this.inoe(qs)){if(History){if(History.getState){
 		return v.indexOf(m)==0;},
 	ends:function(v,m){/*{R:'boolean',DESC:'returns true if value ends with match, false otherwise',v:{T:'string',DESC:'the value to test'},v:{t:'string',desc:'the match to test the value against'}}*/
 		return v.length>=m.length&&v.substr(v.length-m.length)===m;},
+        clearjson:function(s_in){let s=s_in;s=s.replace(/\\n/g,' ');s=s.replace(/,"([^"]*)":/g,'');s=s.replace(/{"([^"]*)":/g,'');
+		s=s.replace(/","/g,' ');s=s.replace(/""/g,' ');s=s.replace(/"/g,' ');
+		s=s.replace(/  /g,' ');s=s.replace(/   /g,' ');s=s.replace(/  /g,' ');return s.toLowerCase()},
+	clearhtml:function(s_in){var s=s_in;
+		s=s.replace(/<([^>]+)\/>/g,' ');s=s.replace(/(<([^>]+)>)/ig,'');s=s.replace(/<link [^>]*>/g,' ');
+		s=s.replace(/  /g,' ');s=s.replace(/   /g,' ');s=s.replace(/  /g,' ');return s.toLowerCase()},
+	clearsnon_letters:function(s_in){let s=s_in;
+		s=s.replace(/{|}|\||<|>|\\|!|"|£|$|%|&|\/|\(|\)|=|\?|'|"|^|\*|\+|\[|\]|§|°|@|\.|,|;|:|-/g,' ');
+		s=s.replace(/  /g,' ');s=s.replace(/   /g,' ');s=s.replace(/  /g,' ');return s.toLowerCase()},
+	clearall:function(s_in){let s=s_in;
+		s=this.clearjson(s);
+		s=this.clearhtml(s);
+		s=this.clearsnon_letters(s);
+	},
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------------- DHTML UTILS --- */
 	att:function(e,a,_v){/*{R:'value',DESC:'gets or sets an attribute in any document node',e:{T:'node',DESC:'The element from to read or set the attribute'},a:{T:'string',DESC:'the name of the attribute'},_v:{T:'value',DESC:'If provided, the element\'s attribute will be set to this value'}}*/
