@@ -1,4 +1,4 @@
-it3.time={default_weekstart:1;
+it3.time={default_weekstart:1,
 	monthNames:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
 	
 	parseYear:function(v,_defaultyear){
