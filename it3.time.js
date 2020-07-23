@@ -18,8 +18,8 @@ it3.time={default_weekstart:1,
 			
 		}
 	},
-	setzerotime:function(d){d.setHours(0);d.setMinutes(0);d.setSeconds(1);},
-	setfulltime:function(d){d.setHours(23);d.setMinutes(59);d.setSeconds(59);},
+	setzero:function(d){d.setHours(0);d.setMinutes(0);d.setSeconds(1);},
+	setfull:function(d){d.setHours(23);d.setMinutes(59);d.setSeconds(59);},
 	monthstarter:function(d){while(d.getDate()!=1){d.setDate(d.getDate()-1);}},
 	weekstarter:function(d,f){while(d.getDay()!=parseInt(f)){d.setTime(it3.time.backtime(d,-1));}},
 	backtime:function(a,b){var day=(24*3600*1000);return (a.getTime()-day*b);},
