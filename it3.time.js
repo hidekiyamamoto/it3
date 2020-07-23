@@ -1,4 +1,4 @@
-it3.time={
+it3.time={default_weekstart:1;
 	monthNames:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
 	
 	parseYear:function(v,_defaultyear){
@@ -22,10 +22,6 @@ it3.time={
 	setfulltime:function(d){d.setHours(23);d.setMinutes(59);d.setSeconds(59);},
 	monthstarter:function(d){while(d.getDate()!=1){d.setDate(d.getDate()-1);}},
 	weekstarter:function(d,f){while(d.getDay()!=parseInt(f)){d.setTime(it3.data.sane.backtime(d,-1));}},
-	default_weekstart:1;
-};
-
-it3.data.sane={
 	backtime:function(a,b){var day=(24*3600*1000);return (a.getTime()-day*b);},
 	setdmdm:function(ds,Ds,Ms,de,De,Me){ds.setMonth(Ms,Ds);de.setMonth(Me,De);},
 	get:function(sel){let flag=sel.indexOf(':')>-1;
@@ -35,9 +31,17 @@ it3.data.sane={
 			if(typeof this.op[a]=='function'){this.op[a](b,st,ed)}
 			else if(this.op[a][b]){sel=sel.substr(1);this.op[a][b](sel,st,ed);}}
 		else{console.log('No sane function')}
-		this.setzerotime(st);this.setfulltime(ed);return {s:st,e:ed};},
+		this.setzero(st);this.setfull(ed);return {s:st,e:ed};},
 	op:{'-':{'d':function(c,s,e){s.setDate(s.getDate()-parseInt(c))},
-			'w':function(c,s,e){s.setTime(it3.data.sane.backtime(s,7*parseInt(c)));it3.data.sane.weekstarter(s,it3.data.weekstart);it3.data.sane.weekstarter(e,it3.data.weekstart);e.setDate(e.getDate()-1)},
+			'w':function(c,s,e){s.setTime(it3.data.sane.backtime(s,7*(parseInt(c)+1)));
+								it3.data.sane.weekstarter(s,it3.data.weekstart);
+								e.setTime(it3.data.sane.backtime(e,7));
+								it3.data.sane.weekstarter(e,it3.data.weekstart);e.setDate(e.getDate()-1)},
+			'W':function(c,s,e){s.setTime(it3.data.sane.backtime(s,7*parseInt(c)));
+								e.setTime(it3.data.sane.backtime(e,7*parseInt(c)));
+								it3.data.sane.weekstarter(s,it3.data.weekstart);
+								it3.data.sane.weekstarter(e,it3.data.weekstart);
+								e.setDate(e.getDate()+6)},
 			'm':function(c,s,e){s.setMonth(s.getMonth()-(parseInt(c)%12));s.setFullYear(s.getFullYear()-(Math.trunc(parseInt(c)/12)));it3.data.sane.monthstarter(s);
 				it3.data.sane.monthstarter(e);e.setDate(e.getDate()-1)},
 			'M':function(c,s,e){s.setMonth(s.getMonth()-(parseInt(c)%12));s.setFullYear(s.getFullYear()-(Math.trunc(parseInt(c)/12)));it3.data.sane.monthstarter(s);
@@ -65,12 +69,12 @@ it3.data.sane={
 				else if(c==3){it3.data.sane.setdmdm(s,1,8,e,1,0);e.setFullYear(e.getFullYear()+1);}},
 		'fw':function(arg,s,e){},
 		's':function(arg,s,e){
-				if(arg[0]=='1'){it3.data.sane.setdmdm(s,1,0,e,1,6);}
-				else{it3.data.sane.setdmdm(s,1,6,e,1,0);e.setFullYear(s.getFullYear()+1);}},
+			if(arg[0]=='1'){it3.data.sane.setdmdm(s,1,0,e,1,6);}
+			else{it3.data.sane.setdmdm(s,1,6,e,1,0);e.setFullYear(s.getFullYear()+1);}},
 		'x':function(arg,s,e){
 			if(arg=='n'){
 				s.setFullYear(2019);
 				e.setFullYear(2019);
 				it3.data.sane.setdmdm(s,1,10,e,1,12);
-			}},
+		}	},
 }	};
