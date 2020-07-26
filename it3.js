@@ -16,7 +16,7 @@ it3={NS:'it3',$$:function(e){if(typeof e=='string'){e=document.getElementById(e)
 		let uint8array=encoder.encode(data + "\n\n");writer.write(uint8array);writer.close();},
      	makebloblink:function(content,filename,contentType,linkid){if(!contentType){contentType='application/octet-stream';}var blob=new Blob([content],{'type': contentType});
 		var link=window.document.createElement('a');link.id=linkid;link.href=window.URL.createObjectURL(blob);link.download=filename;
-		link.innerHTML='<i class="icon ion-android-download"></i> Download export';return link;}
+		link.innerHTML='<i class="icon ion-android-download"></i> Download export';return link;},
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------- STRING UTILS ---  */
 	inoe:function(v){/*{R:'boolean',DESC:'returns true if value Is Null Or Empty, false otherwise',v:{T:'string',DESC:'the value to test'}}*/
