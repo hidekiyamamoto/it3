@@ -14,6 +14,9 @@ it3={NS:'it3',$$:function(e){if(typeof e=='string'){e=document.getElementById(e)
 	downloadbig:function(data,fn){if(!streamSaver){console.log('No streamSaver js detected : install with:');console.log('<script src="https://cdn.jsdelivr.net/gh/jimmywarting/StreamSaver.js/StreamSaver.js"></script>')}
 		let fileStream=streamSaver.createWriteStream(fn);let writer=fileStream.getWriter();let encoder=new TextEncoder();
 		let uint8array=encoder.encode(data + "\n\n");writer.write(uint8array);writer.close();},
+     	makebloblink:function(content,filename,contentType,linkid){if(!contentType){contentType='application/octet-stream';}var blob=new Blob([content],{'type': contentType});
+		var link=window.document.createElement('a');link.id=linkid;link.href=window.URL.createObjectURL(blob);link.download=filename;
+		link.innerHTML='<i class="icon ion-android-download"></i> Download export';return link;}
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------- STRING UTILS ---  */
 	inoe:function(v){/*{R:'boolean',DESC:'returns true if value Is Null Or Empty, false otherwise',v:{T:'string',DESC:'the value to test'}}*/
@@ -60,7 +63,7 @@ it3={NS:'it3',$$:function(e){if(typeof e=='string'){e=document.getElementById(e)
 		break}}if(flag){delete this.Rpreloading;_next(this.preloaded);}}},
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------ JSON RENDER ENGINE --- */
-rrgx0:new RegExp('<!--TT{([^>]*)}TT-->'),rrgx1:new RegExp('<!--JS{([^>]*)}JS-->'),rrgx2:new RegExp('JS-([^=]+)="([^"]*)"'),
+	rrgx0:new RegExp('<!--TT{([^>]*)}TT-->'),rrgx1:new RegExp('<!--JS{([^>]*)}JS-->'),rrgx2:new RegExp('JS-([^=]+)="([^"]*)"'),
 	rrgxLAST:new RegExp('<!--LOAD{([^>]*)}LOAD-->'),rrgxSCRIPT:/<script\b[^>]*>([\s\S]*?)<\/script>/gm,
 	/*var rxs=/(<|%3C)script[\s\S]*?(>|%3E)[\s\S]*?(<|%3C)(\/|%2F)script[\s\S]*?(>|%3E)/gi;*/
 	render:function(tgt,tpl,data,_mode){if(!_mode){_mode='normal'}var out=this._render(tpl,data);this._renderfill(tgt,out[0],_mode,out[1]);},
@@ -103,9 +106,7 @@ rrgx0:new RegExp('<!--TT{([^>]*)}TT-->'),rrgx1:new RegExp('<!--JS{([^>]*)}JS-->'
 		this._tables[elm.id]=new this.Table(tuid,elm);return this._tables[elm.id]}},_tables:{},
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------ BUFFER UTILS------------ --- */
-	makebloblink:function(content,filename,contentType,linkid){if(!contentType)contentType='application/octet-stream';
-		var blob=new Blob([content],{'type': contentType});var link=window.document.createElement('a');link.id=linkid;
-		link.href=window.URL.createObjectURL(blob);link.download=filename;link.innerHTML='<i class="icon ion-android-download"></i> Download export';return link;}
+
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------ DATA STRUCTURES -------- --- */
 	
