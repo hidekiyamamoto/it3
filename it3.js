@@ -104,8 +104,6 @@ it3={NS:'it3',$$:function(e){if(typeof e=='string'){e=document.getElementById(e)
 	tableremove:function(elm){elm=this.$$(elm);if(elm){if(this._tables[elm.id]){delete this._tables[elm.id]; return true}}return false},
 	table:function(elm){elm=this.$$(elm);var tuid=this.uid();if(this.inoe(elm.id)){elm.id=tuid;}if(this._tables[elm.id]){return this._tables[elm.id]}else{
 		this._tables[elm.id]=new this.Table(tuid,elm);return this._tables[elm.id]}},_tables:{},
-/* ----------------------------------------------------------------------------------------------------------------------- */
-/* ------------------------------------------------------------------------------------------ BUFFER UTILS------------ --- */
 
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------ DATA STRUCTURES -------- --- */
