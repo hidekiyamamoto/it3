@@ -3,9 +3,7 @@ window._UA=navigator.userAgent.toLowerCase();window.tempfix=false;
 window.HOST=document.location.protocol.toString()+'//'+document.location.hostname.toString();
 it3={NS:'it3',$$:function(e){if(typeof e=='string'){e=document.getElementById(e);}return e;},$$c:function(e){return document.getElementsByClassName(e);},
 	_uid:0,uid:function(_pfx){/*{R:'string'}*/this._uid++;if(!_pfx){_pfx='uid'}return _pfx+'-'+this._uid},fix:function(ev){ev.stopPropagation();ev.preventDefault();},
-	extend:function(initial,extend){
-		for(k in extend){initial[k]=extend[k]||(initial[k]||null);}
-	},
+	extend:function(initial,extend){for(k in extend){initial[k]=extend[k]||(initial[k]||null);}},
 	sleep:function(milliseconds){return new Promise(resolve => setTimeout(resolve, milliseconds));},
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------- BROWSER UTILS --- */
@@ -13,17 +11,9 @@ it3={NS:'it3',$$:function(e){if(typeof e=='string'){e=document.getElementById(e)
 	toggleFullScreen:function(){/*{R:'void',DESC:{}}*/
 		var d=document;var de=d.documentElement;if((d.fullScreenElement&&d.fullScreenElement!==null)||(!d.mozFullScreen&&!d.webkitIsFullScreen)){if(de.requestFullScreen){de.requestFullScreen();}else if(de.mozRequestFullScreen){de.mozRequestFullScreen();}else if(de.webkitRequestFullScreen){de.webkitRequestFullScreen(Element.ALLOWKEYBOARDINPUT);}}else{if(d.cancelFullScreen){d.cancelFullScreen();}else if(d.mozCancelFullScreen){d.mozCancelFullScreen();}else if(d.webkitCancelFullScreen){d.webkitCancelFullScreen();}}},
 	querystring:function(key,qs){if(this.inoe(qs)){if(History){if(History.getState){qs=History.getState().url;}}if(!qs){qs=location.href}}qs=qs.slice(qs.indexOf('?'));if(!key){return qs;}if(key==''){return '';}var deft_="";key=key.replace(/[\[]/,'\\\[').replace(/[\]]/,'\\\]');var regex=new RegExp('[\\?&]'+key+'=([^&#]*)');qs=regex.exec(qs);if(qs==null){return deft_;}else{return decodeURIComponent(qs[1]);}},
-	downloadbig:function(data,fn){
-	if(!streamSaver){
-		console.log('No streamSaver js detected : install with:');
-		console.log('<script src="https://cdn.jsdelivr.net/gh/jimmywarting/StreamSaver.js/StreamSaver.js"></script>')
-	}
-	let fileStream=streamSaver.createWriteStream(fn);
-	let writer = fileStream.getWriter();
-	let encoder=new TextEncoder();
-	let uint8array = encoder.encode(data + "\n\n");
-	writer.write(uint8array);
-	writer.close();},
+	downloadbig:function(data,fn){if(!streamSaver){console.log('No streamSaver js detected : install with:');console.log('<script src="https://cdn.jsdelivr.net/gh/jimmywarting/StreamSaver.js/StreamSaver.js"></script>')}
+		let fileStream=streamSaver.createWriteStream(fn);let writer=fileStream.getWriter();let encoder=new TextEncoder();
+		let uint8array=encoder.encode(data + "\n\n");writer.write(uint8array);writer.close();},
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------- STRING UTILS ---  */
 	inoe:function(v){/*{R:'boolean',DESC:'returns true if value Is Null Or Empty, false otherwise',v:{T:'string',DESC:'the value to test'}}*/
