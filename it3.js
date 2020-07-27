@@ -25,6 +25,7 @@ it3={NS:'it3',$$:function(e){if(typeof e=='string'){e=document.getElementById(e)
 		return v.indexOf(m)==0;},
 	ends:function(v,m){/*{R:'boolean',DESC:'returns true if value ends with match, false otherwise',v:{T:'string',DESC:'the value to test'},v:{t:'string',desc:'the match to test the value against'}}*/
 		return v.length>=m.length&&v.substr(v.length-m.length)===m;},
+        spad:function(num,size){var s=num.toString();while(s.length<size){s="0"+s};return s;},
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------------- DHTML UTILS --- */
 	att:function(e,a,_v){/*{R:'value',DESC:'gets or sets an attribute in any document node',e:{T:'node',DESC:'The element from to read or set the attribute'},a:{T:'string',DESC:'the name of the attribute'},_v:{T:'value',DESC:'If provided, the element\'s attribute will be set to this value'}}*/
