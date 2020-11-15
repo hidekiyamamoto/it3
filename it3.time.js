@@ -74,4 +74,18 @@ it3.time={default_weekstart:1,
 				e.setFullYear(2019);
 				it3.time._setdmdm(s,1,10,e,1,12);
 		}	},
-}	};
+	},
+	week_selector:function(odate){var out='';let date=new Date(odate);
+		date.setHours(0);date.setMinutes(0);date.setSeconds(0);date.setMilliseconds(0);
+		let d=date.getDay();while(d!=it3.data.weekstart){date=new Date(date.setDate(date.getDate()-1));d=date.getDay();}
+		let y=date.getFullYear();let m=date.getMonth()+1;
+		if(m<10){out=y+' 0'+m;}else{out=y+' '+m;}
+		if(date.getDate()<10){out=out+' 0'+date.getDate()+' -';}
+		else{out=out+' '+date.getDate()+' -';}
+		var start = new Date(date.getFullYear(), 0, 0);
+		var diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
+		var oneDay = 1000 * 60 * 60 * 24;
+		var day = Math.floor(diff / oneDay);
+		out=date.getFullYear()+'/W'+it3.data.pad(Math.floor(day/7)+2,2);
+	return out;}
+};
