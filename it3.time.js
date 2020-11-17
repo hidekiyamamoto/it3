@@ -37,8 +37,8 @@ it3.time={default_weekstart:1,
 				s.setTime(it3.time.backtime(s,7*(parseInt(c)+1)));it3.time.weekstarter(s,it3.data.weekstart);
 				e.setTime(it3.time.backtime(e,7));it3.time.weekstarter(e,it3.data.weekstart);e.setDate(e.getDate()-1)},
 			'W':function(c,s,e){
-				s.setTime(it3.time.backtime(s,7*parseInt(c)));it3.time.weekstarter(s,it3.data.weekstart);
-				e.setTime(it3.time.backtime(e,7*parseInt(c)));it3.time.weekstarter(e,it3.data.weekstart);e.setDate(e.getDate()+6)},
+				s.setTime(it3.time.backtime(s,7*(parseInt(c)+1)));it3.time.weekstarter(s,it3.data.weekstart);
+				e.setTime(it3.time.backtime(e,7*(parseInt(c)+1)));it3.time.weekstarter(e,it3.data.weekstart);e.setDate(e.getDate()+6)},
 			'm':function(c,s,e){s.setMonth(s.getMonth()-(parseInt(c)%12));s.setFullYear(s.getFullYear()-(Math.trunc(parseInt(c)/12)));it3.time.monthstarter(s);
 				it3.time.monthstarter(e);e.setDate(e.getDate()-1)},
 			'M':function(c,s,e){s.setMonth(s.getMonth()-(parseInt(c)%12));s.setFullYear(s.getFullYear()-(Math.trunc(parseInt(c)/12)));it3.time.monthstarter(s);
