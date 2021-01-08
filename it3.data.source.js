@@ -66,9 +66,7 @@ it3.data.Datasource=function(report,name,data,oo,_Tdata){this.D=data;this.uid=it
 						if(this.O[r][c]!=this.F[COLS[c].name]){
 							this.O[r]=null;for(db_r in this.OUTIDX){if(this.OUTIDX[db_r]==r){delete this.OUTIDX[db_r];rem.push(r)}}
 							c=10000;
-						}
-					}
-				}
+				}	}	}
 			}if(this.O[r]!=null){
 			if(!this.final_accept[this.oo.def.final_accept](this.O[r],this.oo.def.final_accept_args)){
 				this.O[r]=null;for(db_r in this.OUTIDX){if(this.OUTIDX[db_r]==r){delete this.OUTIDX[db_r];rem.push(r)}}

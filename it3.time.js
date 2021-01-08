@@ -75,17 +75,17 @@ it3.time={default_weekstart:1,
 				it3.time._setdmdm(s,1,10,e,1,12);
 		}	},
 	},
-	week_selector:function(odate){var out='';let date=new Date(odate);
-		date.setHours(0);date.setMinutes(0);date.setSeconds(0);date.setMilliseconds(0);
-		let d=date.getDay();while(d!=it3.data.weekstart){date=new Date(date.setDate(date.getDate()-1));d=date.getDay();}
-		let y=date.getFullYear();let m=date.getMonth()+1;
-		if(m<10){out=y+' 0'+m;}else{out=y+' '+m;}
-		if(date.getDate()<10){out=out+' 0'+date.getDate()+' -';}
-		else{out=out+' '+date.getDate()+' -';}
-		let start = new Date(date.getFullYear(), 0, 0);
-		let diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
-		let oneDay = 1000 * 60 * 60 * 24;
-		let day = Math.floor(diff / oneDay);
-		out=date.getFullYear()+'/W'+it3.data.pad(Math.floor(day/7)+2,2);
-	return out;}
+	week_selector:function(d){
+		// Copy date so don't modify original
+		d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+		// Set to nearest Thursday: current date + 4 - current day number
+		// Make Sunday's day number 7
+		d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+		// Get first day of year
+		var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+		// Calculate full weeks to nearest Thursday
+		var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+		// Return array of year and week number
+		return d.getUTCFullYear()+'/W'+weekNo;
+	}
 };
