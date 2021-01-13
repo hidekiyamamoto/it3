@@ -87,5 +87,10 @@ it3.time={default_weekstart:1,
 		var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
 		// Return array of year and week number
 		return d.getUTCFullYear()+'/W'+weekNo;
+	},
+	quarter_selector:function(d){
+		d = d || new Date();
+		var m = Math.floor(d.getMonth()/3) + 2;
+		return 'Q'+(m > 4? m - 4 : m);
 	}
 };
