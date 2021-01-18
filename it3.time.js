@@ -77,7 +77,12 @@ it3.time={default_weekstart:1,
 	},
 	week_selector:function(d){
 		// Copy date so don't modify original
+		let addj=0;
 		d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+		if(it3.data.weekstart==0){
+			if(d.getDay()==0){addj=1;
+			}
+		}		
 		// Set to nearest Thursday: current date + 4 - current day number
 		// Make Sunday's day number 7
 		d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
@@ -85,6 +90,7 @@ it3.time={default_weekstart:1,
 		var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
 		// Calculate full weeks to nearest Thursday
 		var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+		weekNo=weekNo+addj;
 		// Return array of year and week number
 		return d.getUTCFullYear()+'/W'+weekNo;
 	},
