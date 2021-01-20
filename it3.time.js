@@ -86,7 +86,10 @@ it3.time={default_weekstart:1,
 		// Calculate full weeks to nearest Thursday
 		var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
 		// Return array of year and week number
-		return d.getUTCFullYear()+'/W'+weekNo;
+		
+		var weekNoStr=''+weekNo;
+		if(weekNoStr.length==1){weekNoStr='0'+weekNoStr}
+		return d.getUTCFullYear()+'/W'+weekNoStr;
 	},
 	quarter_selector:function(d){
 		d = d || new Date();
