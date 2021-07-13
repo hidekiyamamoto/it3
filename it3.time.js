@@ -91,6 +91,13 @@ it3.time={default_weekstart:1,
 		if(weekNoStr.length==1){weekNoStr='0'+weekNoStr}
 		return d.getUTCFullYear()+'/W'+weekNoStr;
 	},
+	week2day:function(w){
+		w=w.split('/W');
+		let year=parseFloat(w[0]);
+		let dd=parseFloat(w[1]);
+		return new Date(year,0,(7*dd)-3);
+		
+	},
 	quarter_selector:function(d){
 		d = d || new Date();
 		var m = Math.floor(d.getMonth()/3) + 2;
