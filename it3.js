@@ -79,11 +79,11 @@ it3={NS:'it3',$$:function(e){if(typeof e=='string'){e=document.getElementById(e)
 			potentialdeeper=t.substring(ridx+8+rpcode.length,endidx);
 			// console.log(potentialdeeper);
 			let rpArr=null;let insideoutput=[];
-			console.log(d, _alpha,rpcode,potentialdeeper);
-			console.log("evalRes: "+eval("(d)"));
+			//console.log(d, _alpha,rpcode,potentialdeeper);
+			//console.log("evalRes: "+eval("(d)"));
 			if(rpcode==''){rpArr=eval("(d"+((typeof _alpha == "number")?"["+_alpha+"]":"")+")");}
 			else{rpArr=eval("(d"+((typeof _alpha == "number")?"["+_alpha+"]":"")+"."+rpcode+")");}
-			console.log(rpArr);
+			//console.log(rpArr);
 			for(let rpK=0;rpK<rpArr.length;rpK++){
 				let returned_render = this._render(potentialdeeper,rpArr,rpK);
 
@@ -93,7 +93,7 @@ it3={NS:'it3',$$:function(e){if(typeof e=='string'){e=document.getElementById(e)
 			// console.log(insideoutput.join(""));
 			t=t.substr(0,ridx)+insideoutput.join("")+t.substr(endidx+8+rpcode.length, t.length-1)
 		}
-		console.log(t);
+		//console.log(t);
 		if(typeof _alpha == "number"){ /*console.log(t);*/t=t.replace(/%ARRIDX%/g, _alpha); /*console.log(t);*/}
 		}while(ridx != -1)
 		var tmp='';var rr=null;var jj=[];d.tmpfn=function(j){try{return eval(j)}catch(ex){return ex.message}};
